@@ -2,6 +2,11 @@
 #include<conio.h>
 using namespace std;
 
+union show
+{
+    long f,f2;
+};
+
 int main(){
 	
 	MAIN:
@@ -24,10 +29,22 @@ int main(){
 	dD = aux2;
 	hD = 24;
 	hD *= aux2;
+	
 	minD = 1440;
 	minD *= aux2;
+	
+	//float to long convert
+	
+	show show1;
+	show1.f = minD;
+	
+	//float to long convert
+	
 	secD = 86400;
 	secD *= aux2;
+	
+	show show2;
+	show2.f2 = secD;
 	
 	
 	if(read>=365){
@@ -152,8 +169,8 @@ int main(){
 			cout << "\nDays: " << dD;
 		}
 		cout << "\nHours: " << hD;
-		cout << "\nMinutes: " << minD;
-		cout << "\nSeconds: " << secD;
+		cout << "\nMinutes: " << show1.f;
+		cout << "\nSeconds: " << show2.f;
 	}
 	
 	cout << "\n\n---------------------";
