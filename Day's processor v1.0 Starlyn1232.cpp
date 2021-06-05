@@ -14,6 +14,8 @@ union show
 
 int main(){
 	
+	system("mode con cols=48 lines=24");
+	
 	MAIN:
 		
 	//Clear console.
@@ -23,12 +25,11 @@ int main(){
 	//Declaring variables.
 	
 	int read=0, year=0,month=0,week=0,days=0,b1=1,b2=0,temp=0,aux=1;
-	float yD=0,mD=0,wD=0,dD=0,hD=0,minD=0,secD=0;
-	float aux2;
+	float yD=0,mD=0,mD2=0,wD=0,dD=0,hD=0,minD=0,secD=0;
+	float aux2=0;
 	
 	//Some settings for the console, as dimensions and title.
 	
-	system("mode con cols=48 lines=24");
 	system("color 0f && title Day's processor v1.0 Starlyn1232");
 	
 	//Here we input the days to variable "read".
@@ -46,7 +47,52 @@ int main(){
 	//keeping original value untouched.
 	
 	yD = aux2/365;
-	mD = aux2/12;
+	mD = aux2;
+	
+	while(mD>=1){
+		if(aux==2){
+			mD-=28;
+			mD2++;
+		}
+		if((aux%2!=0)&&(aux!=2)){
+			mD-=31;
+			mD2++;
+			if(aux==8){
+				mD-=31;
+				mD2++;
+				while((mD>=31)&&(aux!=13)){
+					if((aux%2!=0)&&(mD>=31)){
+						mD-=31;
+						aux++;
+						mD2++;
+					}
+				if((aux%2==0)&&(aux!=2)&&(mD>=30)){
+					mD-=30;
+					aux++;
+					mD2++;
+					}
+				}
+				if(aux==13){
+					aux=1;
+				}
+			}
+		}
+		if((aux%2==0)&&(aux!=2)){
+			mD-=30;
+			mD2++;
+		}
+		aux++;
+		if(aux==13){
+			aux=1;
+		}
+		if((mD<=28)&&(aux!=2)&&(aux%2!=0)){
+			break;
+		}
+		if((mD<=28)&&(aux!=2)&&(aux%2!=0)&&(mD!=1)){
+			break;
+		}
+	}
+	
 	wD = aux2/7;
 	dD = aux2;
 	hD = 24;
@@ -227,7 +273,7 @@ int main(){
 		cout << "\nYears: " << yD;
 	}
 	if(aux2!=0){
-		cout << "\nMonth: " << mD;
+		cout << "\nMonth: " << mD2;
 	}
 	
 	if(aux2!=0){
