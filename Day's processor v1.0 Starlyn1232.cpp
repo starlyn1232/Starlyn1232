@@ -148,6 +148,9 @@ int main(){
 		cout << "\nDays: " << dD;
 	}
 	if(aux2!=0){
+		if(days==0){
+			cout << "\nDays: " << dD;
+		}
 		cout << "\nHours: " << hD;
 		cout << "\nMinutes: " << minD;
 		cout << "\nSeconds: " << secD;
