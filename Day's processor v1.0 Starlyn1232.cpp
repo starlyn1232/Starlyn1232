@@ -56,8 +56,15 @@ int main(){
 	
 	yD = aux2/365;
 	mD = aux2;
+
+        int checkM=0;
 	
-	while(mD>=1){
+	if((mD>=1)&&(mD<=30)){
+		mD2 = (mD/=31);
+		checkM=1;
+	}
+	
+	while((mD>=1)&&(checkM!=1)){
 		if(aux==2){
 			mD-=28;
 			mD2++;
