@@ -24,7 +24,7 @@ int main(){
 	
 	//Declaring variables.
 	
-	int read=0, year=0,month=0,week=0,days=0,b1=1,b2=0,temp=0,aux=1;
+	int read=0, year=0,month=0,week=0,days=0,b1=1,b2=0,lYear=0,aux=1;
 	float yD=0,mD=0,mD2=0,wD=0,dD=0,hD=0,minD=0,secD=0;
 	float aux2=0;
 	
@@ -36,6 +36,14 @@ int main(){
 	
 	cout << "\nHow many days we'll process?: ";
 	cin >> read;
+	
+	if(read<=0){
+		cout << "\nInvalid value!";
+		cout << "\n\n---------------------";
+		cout << "\nPress Enter to restart.";
+		getch();
+		goto MAIN;
+	}
 	
 	//Variable "aux2" will save "read"'s info, why? Because
 	//we need the original value for the detailed info
@@ -145,6 +153,7 @@ int main(){
 				if(b2==2){
 					read-=1;
 					b2=0;
+					lYear++;
 				}
 			}
 			b1++;
@@ -262,38 +271,67 @@ int main(){
 	cout << "\nGeneral Info: " << endl;
 	
 	if(year!=0){
-		cout << "\nYears: " << year;
+		if(lYear>=1){
+			cout << "\nYears: " << year << " (Leap-year = " << lYear <<")";
+		}
+		else if(year<=1){
+			cout << "\nYear: " << year;
+		}
+		else{
+			cout << "\nYears: " << year;
+		}
 	}
 	if(month!=0){
-		cout << "\nMonth: " << month;
+		if(month<=1){
+			cout << "\nMonth: " << month;
+		}
+		else{
+			cout << "\nMonths: " << month;
+		}
 	}
 	
 	if(week!=0){
 		cout << "\nWeek: " << week;
 	}
 	if(days!=0){
-		cout << "\nDays: " << days;
+		if(days<=1){
+			cout << "\nDay: " << days;
+		}
+		else{
+			cout << "\nDays: " << days;
+		}
 	}
 	
 	cout << "\n\nEach Info: " << endl;
 	
 	if(aux2!=0){
-		cout << "\nYears: " << yD;
-	}
-	if(aux2!=0){
+		if(yD<=1){
+			cout << "\nYear: " << yD;
+		}
+		else{
+			cout << "\nYears: " << yD;
+		}
+	if(mD2<=1){
 		cout << "\nMonth: " << mD2;
 	}
-	
-	if(aux2!=0){
+	else{
+		cout << "\nMonths: " << mD2;
+	}
+	if(wD<=1){
 		cout << "\nWeek: " << wD;
 	}
-	if(aux2!=0){
-		if(days==0){
-			cout << "\nDays: " << dD;
-		}
-		cout << "\nHours: " << hD;
-		cout << "\nMinutes: " << show1.f;
-		cout << "\nSeconds: " << show2.f;
+	else{		
+		cout << "\nWeeks: " << wD;
+	}
+	if(dD<=1){	
+		cout << "\nDay: " << dD;
+	}
+	else{
+		cout << "\nDays: " << dD;
+	}
+	cout << "\nHours: " << hD;
+	cout << "\nMinutes: " << show1.f;
+	cout << "\nSeconds: " << show2.f;
 	}
 	
 	cout << "\n\n---------------------";
