@@ -86,9 +86,17 @@ int main(){
 			aux=1;
 		}
 		if((mD<=28)&&(aux!=2)&&(aux%2!=0)){
+			if(mD!=1){
+				mD2+=(mD/31);
+				break;
+			}
 			break;
 		}
-		if((mD<=28)&&(aux!=2)&&(aux%2!=0)&&(mD!=1)){
+		if((mD<=28)&&(aux!=2)&&(aux%20)&&(mD!=1)){
+			if(mD!=1){
+				mD2+=(mD/30);
+				break;
+			}
 			break;
 		}
 	}
