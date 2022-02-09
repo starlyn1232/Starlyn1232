@@ -60,9 +60,9 @@ namespace ConsoleApp2
                 Console.Write("\n== Calculator Super Simple By Starlyn1232 ==");
                 Console.WriteLine("\n============================================");
                 Console.Write("\n1-Sumar.");
-                Console.Write("\n1-Restar.");
-                Console.Write("\n1-Dividir.");
-                Console.Write("\n1-Multiplicar.");
+                Console.Write("\n2-Restar.");
+                Console.Write("\n3-Dividir.");
+                Console.Write("\n4-Multiplicar.");
                 Console.Write("\n5-Salir.");
 
                 Console.Write("\n\nOpcion: ");
