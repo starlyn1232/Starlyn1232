@@ -51,8 +51,6 @@ namespace ConsoleApp2
 
             CCalculator calculator = new CCalculator();
 
-            int[] num = new int[2];
-
             string option = "";
 
             while(option != "5")
