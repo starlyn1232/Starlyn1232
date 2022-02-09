@@ -1,0 +1,98 @@
+using System;
+
+namespace ConsoleApp2
+{
+    internal class Program
+    {
+        internal class CCalculator
+        {
+            void waitKey(int num)
+            {
+                Console.WriteLine("\nEl resultado es: " + num);
+                Console.WriteLine("\nPresione cualquier tecla para volver.");
+                Console.ReadKey();
+            }
+
+            public void Suma(int[] num1)
+            {
+                waitKey(num1[0] + num1[1]);
+            }
+
+            public void Resta(int[] num1)
+            {
+                waitKey(num1[0] - num1[1]);
+            }
+
+            public void Dividir(int[] num1)
+            {
+                waitKey(num1[0] / num1[1]);
+            }
+
+            public void Multi(int[] num1)
+            {
+                waitKey(num1[0] * num1[1]);
+            }
+        }
+
+        static void Main()
+        {
+            static int[] askNum()
+            {
+                int[] ask = new int[2];
+
+                Console.Write("\nPrimer numero: ");
+                ask[0] = Convert.ToInt32(Console.ReadLine());
+
+                Console.Write("Segundo numero: ");
+                ask[1] = Convert.ToInt32(Console.ReadLine());
+
+                return ask;
+            }
+
+            CCalculator calculator = new CCalculator();
+
+            int[] num = new int[2];
+
+            string option = "";
+
+            while(option != "5")
+            {
+                Console.Clear();
+                Console.Write("\n============================================");
+                Console.Write("\n== Calculator Super Simple By Starlyn1232 ==");
+                Console.WriteLine("\n============================================");
+                Console.Write("\n1-Sumar.");
+                Console.Write("\n1-Restar.");
+                Console.Write("\n1-Dividir.");
+                Console.Write("\n1-Multiplicar.");
+                Console.Write("\n5-Salir.");
+
+                Console.Write("\n\nOpcion: ");
+                option = Console.ReadLine();
+
+                if(option == "1")
+                {
+                    calculator.Suma(askNum());
+                }
+
+                if (option == "2")
+                {
+                    calculator.Resta(askNum());
+                }
+
+                if (option == "3")
+                {
+                    calculator.Dividir(askNum());
+                }
+
+                if (option == "4")
+                {
+                    calculator.Multi(askNum());
+                }
+            }
+
+            Console.WriteLine("\nSaliendo!");
+            Console.ReadKey();
+        }
+    }
+}
