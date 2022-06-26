@@ -14,7 +14,7 @@ I'll Code:
 *Replacer. (Done - 23:19)
 *Remover. (Done - 23:21)
 
-(Took me more than I expected, solving some pending meanwhile at some place at the Earth, anyway, here is the header, I just wanted some challenge.
+(Took me more than I expected, solving some pending meanwhile at some place at the Earth, anyway, here is the header, I just wanted some challenge)
 */
 
 //Some head guards
