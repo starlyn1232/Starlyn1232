@@ -1,7 +1,7 @@
 /*
 String functions from C# to C++ By Starlyn1232: (6/25/2022 - 21:35)
 
-Entry Note: Hi, surely there are headers available for these functions, and, of course, the string library itself could bring most of these features (or all), but, I just prefer to try to reach it by myself, I hope you like to do the same most time.
+Entry Note: Hi, surely there are headers available for these functions, and, of course, the string library itself could bring most of them(or all), but, I just prefer to try to reach it by myself, I hope you like to do the same most time.
 
 I'll Code:
 
