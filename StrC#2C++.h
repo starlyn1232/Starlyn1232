@@ -511,15 +511,8 @@ std::string StrFormat(wordFormat words){
 				return "";
 			}
 			
-			MsgDebug(words[0][i]);
-			std::cout<<test<<std::endl;
-			MsgDebug(words[0][i+2]);
-			
 			StrSub(words[0],0,i, help);
 			StrSub(words[0],i+3, help2);
-			
-			MsgDebug(help);
-			MsgDebug(help2);
 			
 			words[0] = help+words[test+1]+help2;
 			
