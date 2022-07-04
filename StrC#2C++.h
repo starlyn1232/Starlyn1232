@@ -47,22 +47,15 @@ Update: (7/4/2022)
 
 bool debug_view = false;
 
-//Debug Viewer
+//Debug Viewer (Now using a template, generic type will help to use int, char, string, etc.)
 
-void MsgDebug(std::string txt){
+template<class T>
+void MsgDebug(T data){
 	
 	//Show only if we had set "debug_view" to True
 	
 	if(debug_view)
-		std::cout << "\nDebug Msg : \"" << txt << "\"\n" << std::endl;
-}
-
-void MsgDebug(char c){
-	
-	//Show only if we had set "debug_view" to True
-	
-	if(debug_view)
-		std::cout << "\nDebug Msg : \"" << c << "\"\n" << std::endl;
+		std::cout << "\nDebug Msg : \"" << data << "\"\n" << std::endl;
 }
 
 //Let's check all character in the string
@@ -477,6 +470,37 @@ bool isdigit(char *c){
 	return false;
 }
 
+//Word indexer for formatter using reference, and overloading, good for practice
+
+bool indexHelp(wordFormat &words,int i,int i1,int i2,int i3){
+	
+	std::string help("");
+	std::string help2("");
+	
+	if(words[0][i] == '{' && isdigit(words[0][i1]) && words[0][i2] == '}'){
+		
+		int test = int(words[0][i1]- '0');
+	
+		if(test > words.size()){
+				MsgDebug("StrFormat IndexOutRange error!");
+				return false;
+		}
+			
+		StrSub(words[0],0,i, help);
+		StrSub(words[0],i3, help2);
+			
+		words[0] = help+words[test+1]+help2;
+	}
+	
+	
+	return true;
+}
+
+bool indexHelp(wordFormat &words,int i){
+	
+	return indexHelp(words,i,i+1,i+2,i+3);
+}
+
 std::string StrFormat(wordFormat words){
 	
 	//Validate data
@@ -493,31 +517,19 @@ std::string StrFormat(wordFormat words){
 	//Variables
 	
 	auto len = words[0].size();
-	std::string help("");
-	std::string help2("");
 	
 	//Word processing
 	
-	for(int i=0;i<len-3;i++){
-	
-		//MsgDebug("\nHi);
-	
-		if(words[0][i] == '{' && isdigit(words[0][i+1]) && words[0][i+2] == '}'){
+	for(int i=0;i<=len-3;i++){
+		
+		if(!indexHelp(words,i))
+			return "";
 			
-			int test = int(words[0][i+1]- '0');
-			
-			if(test > words.size()){
-				MsgDebug("StrFormat IndexOutRange error!");
-				return "";
-			}
-			
-			StrSub(words[0],0,i, help);
-			StrSub(words[0],i+3, help2);
-			
-			words[0] = help+words[test+1]+help2;
-			
-			i+=2;
-		}
+		//We has to update the len value, because after some modification at main string, the len will change
+		//and we need to analyze the whole word even if it's bigger
+		
+		else
+			len = words[0].size();
 	}
 	
 	//Return new formated word
