@@ -1,7 +1,7 @@
 /*
 String functions from C# to C++ By Starlyn1232: (6/25/2022 - 21:35)
 
-Entry Note: Hi, surely there are headers available for these functions, and, of course, the string library itself could bring most of them(or all), but, I just prefer to try to reach it by myself, I hope you like to do the same most time.
+Entry Note: Hi, surely there are headers available for these functions, and, of course, the string library itself could bring most of these features (or all), but, I just prefere to try to reach it by myself, I hope you like to do the same most time.
 
 I'll Code:
 
@@ -15,16 +15,32 @@ I'll Code:
 *Remover. (Done - 23:21)
 
 (Took me more than I expected, solving some pending meanwhile at some place at the Earth, anyway, here is the header, I just wanted some challenge)
+
+Update: (7/4/2022)
+
+*Index of has a new overload to accept 'char' values as attribute. (Done)
+*Word counter. (Done)
+*String.Format method. (Done)
 */
 
 //Some head guards
+
+//Needed for strings
 
 #ifndef string
 #include<string>
 #endif
 
+//Needed for debugger
+
 #ifndef iostream
 #include<iostream>
+#endif
+
+//Needed for String.Format
+
+#ifndef vector
+#include<vector>
 #endif
 
 //Global value for debug
@@ -39,6 +55,14 @@ void MsgDebug(std::string txt){
 	
 	if(debug_view)
 		std::cout << "\nDebug Msg : \"" << txt << "\"\n" << std::endl;
+}
+
+void MsgDebug(char c){
+	
+	//Show only if we had set "debug_view" to True
+	
+	if(debug_view)
+		std::cout << "\nDebug Msg : \"" << c << "\"\n" << std::endl;
 }
 
 //Let's check all character in the string
@@ -199,8 +223,6 @@ bool StrCmp(std::string txt1, std::string txt2){
 	//Usage sample : bool state = StrCmp("Edwin","Eury"); //False
 }
 
-//Str indexers
-
 int StrIndexOf(std::string txt, std::string StrIndex){
 	
 	//Validate info
@@ -228,6 +250,19 @@ int StrIndexOf(std::string txt, std::string StrIndex){
 	}
 	
 	return -1;
+}
+
+//Str indexers
+
+int StrIndexOf(std::string txt, char charIndex){
+	
+	//Temp value
+	
+	std::string temp = "";
+	temp += charIndex;
+	
+	return StrIndexOf(txt,temp);
+	
 }
 
 int StrLastIndexOf(std::string txt, std::string StrIndex){
@@ -366,4 +401,135 @@ std::string StrReplace(std::string txt,std::string oldStr, std::string newStr){
 
 std::string StrRemove(std::string txt, std::string strRemove){
 	return StrReplace(txt,strRemove,"");
+}
+
+//String counter
+
+int StrCount(std::string txt, std::string word){
+	
+	//Validation
+	
+	if(!StrContains(txt,word))
+		return 0;
+	
+	//Prepare auxiliar variables
+	
+	auto len = txt.size();
+	std::string help(""),newStr("");
+	int help2[2] = {0,0};
+	int result = 0;
+	
+	//While string contains the old value, we'll replace it!
+	
+	while(StrContains(txt,word)){
+				
+		//Prepare the help value
+		
+		len = txt.size();
+		help = "";
+		help2[0] = StrIndexOf(txt,word);
+		help2[1] = word.size();
+		
+		for(int i=0;i<=len;i++){
+			
+			//Here we know what to append and what to avoid.
+						
+			if(i >= help2[0] && help2[1] != 0){
+				
+				//As this would be the last time skipping that oldStr, we add the new one to the tempValue ("help")!
+				
+				if(help2[1] == 1)
+					help += "";
+				
+				help2[1]--;
+				
+				continue;
+			}
+			
+			else
+				help += txt[i];
+		}
+		
+		txt = help;
+		
+		result++;
+	}
+	
+	return result;
+	
+	//Usage sample : int count = StrCount(name,"a");
+}
+
+//String.Format
+
+//Alias for params
+
+typedef std::vector<std::string> wordFormat;
+
+bool isdigit(char *c){
+	MsgDebug("StrFormat IndexOutRange error!");
+	
+	char chars[] = {'0','1','2','3','4','5','6','7','8','9'};
+	for(int i=0;i<=10;i++)
+		if(chars[i] == *c)
+			return true;
+	
+	return false;
+}
+
+std::string StrFormat(wordFormat words){
+	
+	//Validate data
+	
+	if(words.size() < 1)
+		return "";
+	
+	else if(words.size() == 1)
+		return words[0];
+		
+	else if(words[0].size() < 4)
+		return words[0];
+	
+	//Variables
+	
+	auto len = words[0].size();
+	std::string help("");
+	std::string help2("");
+	
+	//Word processing
+	
+	for(int i=0;i<len-3;i++){
+	
+		//MsgDebug("\nHi);
+	
+		if(words[0][i] == '{' && isdigit(words[0][i+1]) && words[0][i+2] == '}'){
+			
+			int test = int(words[0][i+1]- '0');
+			
+			if(test > words.size()){
+				MsgDebug("StrFormat IndexOutRange error!");
+				return "";
+			}
+			
+			MsgDebug(words[0][i]);
+			std::cout<<test<<std::endl;
+			MsgDebug(words[0][i+2]);
+			
+			StrSub(words[0],0,i, help);
+			StrSub(words[0],i+3, help2);
+			
+			MsgDebug(help);
+			MsgDebug(help2);
+			
+			words[0] = help+words[test+1]+help2;
+			
+			i+=2;
+		}
+	}
+	
+	//Return new formated word
+	
+	return words[0];
+	
+	//Usage sample, std::string URL StrFormat(wordFormat{"www.{0}.{1}","google","com"}); it will return www.google.com
 }
