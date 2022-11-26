@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 
 namespace SecEfsEditor
 {
@@ -131,16 +131,16 @@ namespace SecEfsEditor
                 //Show final Msg
 
                 Console.WriteLine("\nPress Enter to close. Enjoy :)");
-
-                Console.ReadKey();
             }
 
             catch (Exception ex)
             {
                 //Error viewer
 
-                Console.WriteLine($"\nFile error: {ex.Message}");
+                Console.WriteLine($"\nError: {ex.Message}");
             }
+
+            Console.ReadKey();
         }
     }
 }
