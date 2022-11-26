@@ -69,7 +69,8 @@ namespace SecEfsEditor
 
                 //Run analyzer
 
-                while ((data = Encoding.UTF8.GetBytes(reader.ReadLine())) != null)
+                while ((line = reader.ReadLine()) != null &&
+                    (data = Encoding.UTF8.GetBytes(line)) != null)
                 {
                     if ((line = Convert.ToHexString(data)) == null)
                         break;
@@ -123,7 +124,7 @@ namespace SecEfsEditor
                 //Current sn wasn't found
 
                 else
-                    Console.WriteLine("Not Data found!");
+                    Console.WriteLine("\nNot Data found!");
 
                 //Close StreamReader
 
