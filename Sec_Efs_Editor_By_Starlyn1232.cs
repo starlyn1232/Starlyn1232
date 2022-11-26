@@ -87,7 +87,7 @@ namespace SecEfsEditor
 
                 if (SN_Found)
                 {
-                    Console.WriteLine($"\nData found! (SN : {sn})");
+                    Console.WriteLine($"\nSN Data found! (SN : {sn})");
 
                     //Read New SN
 
@@ -124,7 +124,7 @@ namespace SecEfsEditor
                 //Current sn wasn't found
 
                 else
-                    Console.WriteLine("\nNot Data found!");
+                    Console.WriteLine("\nSN Data not found!");
 
                 //Close StreamReader
 
