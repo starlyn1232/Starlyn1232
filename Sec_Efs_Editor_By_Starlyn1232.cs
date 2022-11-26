@@ -51,6 +51,11 @@ namespace SecEfsEditor
 
                 string sn = Console.ReadLine();
 
+                //Check New SN
+
+                if (sn.Length != 11)
+                    throw new IndexOutOfRangeException("Lenght error, SN must has 11 digits!!!");
+
                 //Convert to hex string (Why? Because we can iterate null character with no problems)
 
                 sn = Convert.ToHexString(Encoding.UTF8.GetBytes(sn));
