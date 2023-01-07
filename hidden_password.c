@@ -5,7 +5,7 @@
 
 #define CORRECT "hola"
 
-void ReadPassword(char *data,const char SHOWING_CHAR){
+void ReadPassword(void *data,const char SHOWING_CHAR){
 	//Declare temporal variables
 	char c = 'a';
 	int sz = 0;
@@ -16,9 +16,9 @@ void ReadPassword(char *data,const char SHOWING_CHAR){
 		
 		//Insert only non-return values
 		if (c != '\r' && c != '\b'){
-      //Show allowed char for hidden characters
+      		//Show allowed char for hidden characters
 			printf("%c",SHOWING_CHAR);
-			*(data+sz) = c;
+			*((char *)data+sz) = c;
 			sz++;
 		}
 		
@@ -32,13 +32,13 @@ void ReadPassword(char *data,const char SHOWING_CHAR){
 	}while(c != '\r');
 	
 	//Set null value
-	*(data+(sz)) = '\0';
+	*(((char*)data)+(sz)) = '\0';
 }
 
 int main(){
 	
 	//Function pointer to use code block memory location
-	void (*ptr)(char *,char);
+	void (*ptr)(void *,char);
 	ptr = ReadPassword;
 	
 	//Char pointer for our word (Memory allocation used)
